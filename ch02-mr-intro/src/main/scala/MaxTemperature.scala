@@ -1,5 +1,7 @@
 package ch02
 
+import org.apache.hadoop.util.GenericOptionsParser
+import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.Path
 import org.apache.hadoop.io.{IntWritable, Text, LongWritable}
 import org.apache.hadoop.mapreduce.Mapper
@@ -42,7 +44,10 @@ class MaxTemperatureReducer extends Reducer[Text, IntWritable, Text, IntWritable
 }
 
 object MaxTemperature {
-  def main(args: Array[String]): Unit = {
+  def main(rawArgs: Array[String]): Unit = {
+    val conf = new Configuration()
+    val args = new GenericOptionsParser(conf, rawArgs).getRemainingArgs()
+
     if (args.length != 2) {
       println("Usage: MaxTemperature <input path> <output path>")
       sys.exit(-1)
