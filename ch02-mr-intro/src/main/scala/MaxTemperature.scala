@@ -53,7 +53,7 @@ object MaxTemperature {
       sys.exit(-1)
     }
 
-    val job = new Job()
+    val job = new Job(conf, "Hadoop book ch02 MaxTemperature example in Scala")
     job.setJarByClass(this.getClass)
     job.setJobName("Max Temperature")
 
